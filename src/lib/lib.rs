@@ -2,5 +2,5 @@
 
 pub mod routes;
 
-pub mod router;
 pub mod parser;
+pub mod router;

@@ -1,8 +1,8 @@
 // src/lib/routes/index.rs
 
 // dependencies
-use rocket::{get, response::content::RawHtml};
 use crate::parser::parser;
+use rocket::{get, response::content::RawHtml};
 
 // index route handler
 #[get("/")]

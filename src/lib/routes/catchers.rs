@@ -2,8 +2,8 @@
 
 // dependencies
 use rocket::catch;
-use rocket::Request;
 use rocket::response::content::RawHtml;
+use rocket::Request;
 
 // 404 handler
 #[catch(404)]
