@@ -13,7 +13,16 @@ mod endpoint_tests {
         let response = client.get("/").dispatch();
 
         assert_eq!(response.status(), Status::Ok);
-        assert_eq!(response.into_string().unwrap(), "<h1>Hello, world!</h1>");
+        assert_eq!(response.into_string().unwrap(), "<h1>Hello, World!</h1>\n");
+    }
+
+    #[test]
+    fn test_index_error() {
+        let client = Client::tracked(create()).expect("valid rocket instance");
+        let response = client.get("/").dispatch();
+
+        assert_eq!(response.status(), Status::Ok);
+        assert_eq!(response.into_string().unwrap(), "<h1>Error reading markdown input file</h1>");
     }
 
     #[test]

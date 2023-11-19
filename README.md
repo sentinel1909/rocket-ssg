@@ -1,3 +1,3 @@
-# Shuttle Rocket Template
+# Rocket Static Site Generator
 
-A template starter for building an app with Rocket and hosting it on Shuttle.
+An static site generator, built with Rocket and hosted on Shuttle.
