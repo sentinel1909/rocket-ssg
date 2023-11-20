@@ -5,7 +5,7 @@ use crate::parser::parser;
 use rocket::{get, response::content::RawHtml};
 
 // index route handler
-#[get("/")]
-pub async fn index() -> RawHtml<String> {
-    parser().await
+#[get("/<path>")]
+pub async fn index(path: &str) -> RawHtml<String> {
+    parser(path).await
 }

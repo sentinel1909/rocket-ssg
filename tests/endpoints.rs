@@ -10,12 +10,13 @@ mod endpoint_tests {
     #[test]
     fn test_index() {
         let client = Client::tracked(create()).expect("valid rocket instance");
-        let response = client.get("/").dispatch();
+        let path = "hello_world";
+        let response = client.get(format!("/{}", path)).dispatch();
 
         assert_eq!(response.status(), Status::Ok);
         assert_eq!(
             response.into_string().unwrap(),
-            "<head><link rel=\"stylesheet\" type=\"text/css\" href=\"/styles.css\"></head><body><h1>Rocket + Markdown!</h1>\n<p>This file is written in markdown, parsed to HTML, and served up by Rocket.</p>\n</body>".to_string()
+            "<head><link rel=\"stylesheet\" type=\"text/css\" href=\"styles/styles.css\"></head><body><h1>Rocket + Markdown!</h1>\n<p>This file is written in markdown, parsed to HTML, and served up by Rocket.</p>\n</body>".to_string()
         );
     }
 
@@ -24,10 +25,10 @@ mod endpoint_tests {
         let client = Client::tracked(create()).expect("valid rocket instance");
         let response = client.get("/not-found").dispatch();
 
-        assert_eq!(response.status(), Status::NotFound);
+        assert_eq!(response.status(), Status::Ok);
         assert_eq!(
             response.into_string().unwrap(),
-            "No such file or directory (os error 2)"
+            "<h1>Error reading markdown input file, this route doesn't exist</h1>"
         );
     }
 }
