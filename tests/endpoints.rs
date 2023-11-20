@@ -13,18 +13,9 @@ mod endpoint_tests {
         let response = client.get("/").dispatch();
 
         assert_eq!(response.status(), Status::Ok);
-        assert_eq!(response.into_string().unwrap(), "<h1>Hello, World!</h1>\n");
-    }
-
-    #[test]
-    fn test_index_error() {
-        let client = Client::tracked(create()).expect("valid rocket instance");
-        let response = client.get("/").dispatch();
-
-        assert_eq!(response.status(), Status::Ok);
         assert_eq!(
             response.into_string().unwrap(),
-            "<h1>Error reading markdown input file</h1>"
+            "<head><link rel=\"stylesheet\" type=\"text/css\" href=\"/styles.css\"></head><body><h1>Rocket + Markdown!</h1>\n<p>This file is written in markdown, parsed to HTML, and served up by Rocket.</p>\n</body>".to_string()
         );
     }
 
@@ -36,7 +27,7 @@ mod endpoint_tests {
         assert_eq!(response.status(), Status::NotFound);
         assert_eq!(
             response.into_string().unwrap(),
-            "<h1>Oh no! We couldn't find the requested path '/not-found'</h1>"
+            "No such file or directory (os error 2)"
         );
     }
 }

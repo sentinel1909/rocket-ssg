@@ -16,10 +16,11 @@ pub async fn parser() -> RawHtml<String> {
     let string_output = std::str::from_utf8(&markdown_input).unwrap();
 
     let mut html_output = String::new();
-    html_output
-        .push_str(r#"<head><link rel="stylesheet" type="text/css" href="/styles.css"></head>"#);
+    html_output.push_str(
+        r#"<head><link rel="stylesheet" type="text/css" href="/styles.css"></head><body>"#,
+    );
     let parser = pulldown_cmark::Parser::new(string_output);
     pulldown_cmark::html::push_html(&mut html_output, parser);
-
+    html_output.push_str("</body>");
     RawHtml(html_output)
 }
